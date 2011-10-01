@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #ifdef _ANDROID
 
-#include "../../options_common.h"
+#include "../../tools/sound_mixer.h"
 
 namespace xPlatform
 {
@@ -31,25 +31,19 @@ void InitSound()
 void DoneSound()
 {
 }
+static eSoundMixer sound_mixer;
 int UpdateSound(byte* buf)
 {
+	sound_mixer.Update();
 	int res = 0;
-	for(int i = Handler()->AudioSources(); --i >= 0;)
+	dword size = sound_mixer.Ready();
+	if(size > 0)
 	{
-		dword size = Handler()->AudioDataReady(i);
-		if(i == OpSound() && !Handler()->FullSpeed())
-		{
-			if(size > 44100*2*2/50*3)//~approx >10600 bytes
-			{
-				res = size;
-				if(res > 32768)
-					res = 32768;
-				memcpy(buf, Handler()->AudioData(i), res);
-				Handler()->AudioDataUse(i, size);
-			}
-		}
-		else
-			Handler()->AudioDataUse(i, size);
+		res = size;
+		if(res > 32768)
+			res = 32768;
+		memcpy(buf, sound_mixer.Ptr(), res);
+		sound_mixer.Use(res);
 	}
 	return res;
 }

@@ -129,7 +129,7 @@ public class Control extends ImageView implements SensorEventListener
 //		case KeyEvent.KEYCODE_MENU:				return 'm';
 //		case KeyEvent.KEYCODE_BACK:				return 'k';
 		case KeyEvent.KEYCODE_CALL:				return 'e';
-		case KeyEvent.KEYCODE_CAMERA:			return ' ';
+		case KeyEvent.KEYCODE_CAMERA:			return 'p';
 		}
 		return 0;
 	}

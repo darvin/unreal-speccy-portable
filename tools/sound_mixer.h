@@ -16,33 +16,26 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef QT_SOUND_H
-#define QT_SOUND_H
+#ifndef __SOUND_MIXER_H__
+#define __SOUND_MIXER_H__
 
-#include "../../std_types.h"
+#include "../std_types.h"
 
 #pragma once
 
-namespace xPlatform
-{
-
-class eAudioBuffer
+class eSoundMixer
 {
 public:
-	eAudioBuffer() : ready(0) {}
-	void	Update(int active_sound_src);
+	eSoundMixer() : ready(0) {}
+	void	Update();
 	dword	Ready() const { return ready; }
 	const void*	Ptr() const { return buffer; }
 	void	Use(dword size);
 
 protected:
-	void	Fill(const void* data, dword size);
 	enum { BUF_SIZE = 65536 };
 	byte	buffer[BUF_SIZE];
 	dword	ready;
 };
 
-}
-//namespace xPlatform
-
-#endif // QT_SOUND_H
+#endif//__SOUND_MIXER_H__

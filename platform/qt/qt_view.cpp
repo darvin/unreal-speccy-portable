@@ -134,11 +134,18 @@ void eView::UpdateScreen(uchar* _scr) const
 //-----------------------------------------------------------------------------
 void eView::UpdateSound()
 {
-	audio_buffer.Update(OpSound());
+	sound_mixer.Update();
+	static bool video_paused = false;
+	bool video_paused_new = sound_mixer.Ready() > (44100*2*2/50)*3; // 3-frame audio data
+	if(video_paused_new != video_paused)
+	{
+		video_paused = video_paused_new;
+		Handler()->VideoPaused(video_paused);
+	}
 	if(audio->state() != QAudio::StoppedState)
 	{
-		qint64 out = stream->write((const char*)audio_buffer.Ptr(), audio_buffer.Ready());
-		audio_buffer.Use(out);
+		qint64 out = stream->write((const char*)sound_mixer.Ptr(), sound_mixer.Ready());
+		sound_mixer.Use(out);
 	}
 }
 

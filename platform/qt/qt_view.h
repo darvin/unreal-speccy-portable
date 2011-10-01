@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define QT_VIEW_H
 
 #include <QWidget>
-#include "qt_sound.h"
+#include "../../tools/sound_mixer.h"
 
 #pragma once
 
@@ -54,7 +54,7 @@ protected:
 	QImage			screen;
 	QAudioOutput*	audio;
 	QIODevice*		stream;
-	eAudioBuffer	audio_buffer;
+	eSoundMixer		sound_mixer;
 };
 
 }

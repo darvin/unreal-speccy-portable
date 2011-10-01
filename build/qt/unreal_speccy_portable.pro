@@ -48,10 +48,10 @@ SOURCES += ../../speccy.cpp \
 	../../tools/options.cpp \
 	../../tools/log.cpp \
 	../../platform/qt/io_select_qt.cpp \
-	../../platform/qt/qt_sound.cpp \
 	../../platform/qt/qt_window.cpp \
 	../../platform/qt/qt_control.cpp \
-	../../platform/qt/qt_view.cpp
+	../../platform/qt/qt_view.cpp \
+    ../../tools/sound_mixer.cpp
 
 HEADERS  += \
 	../../std_types.h \
@@ -109,10 +109,10 @@ HEADERS  += \
 	../../tools/log.h \
 	../../tools/list.h \
 	../../tools/io_select.h \
-	../../platform/qt/qt_sound.h \
 	../../platform/qt/qt_window.h \
 	../../platform/qt/qt_control.h \
-	../../platform/qt/qt_view.h
+	../../platform/qt/qt_view.h \
+    ../../tools/sound_mixer.h
 
 RESOURCES += unreal_speccy_portable.qrc
 
@@ -148,3 +148,7 @@ unix:!symbian {
 	}
 	INSTALLS += target
 }
+
+
+
+
