@@ -67,7 +67,7 @@ public class View extends SurfaceView  implements Callback
 			final int format = AudioFormat.ENCODING_PCM_16BIT;
 			final int buf_size = AudioTrack.getMinBufferSize(freq, channels, format);
 			track = new AudioTrack(	AudioManager.STREAM_MUSIC,
-					freq, channels, format, buf_size*2,
+					freq, channels, format, buf_size*4,
 					AudioTrack.MODE_STREAM);
 			track.play();
 		}

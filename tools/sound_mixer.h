@@ -27,10 +27,10 @@ class eSoundMixer
 {
 public:
 	eSoundMixer() : ready(0) {}
-	void	Update();
+	void	Update(byte* ext_buf = NULL);
 	dword	Ready() const { return ready; }
 	const void*	Ptr() const { return buffer; }
-	void	Use(dword size);
+	void	Use(dword size, byte* ext_buf = NULL);
 
 protected:
 	enum { BUF_SIZE = 65536 };

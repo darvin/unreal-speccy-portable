@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //=============================================================================
 //	eSoundMixer::Update
 //-----------------------------------------------------------------------------
-void eSoundMixer::Update()
+void eSoundMixer::Update(byte* ext_buf)
 {
 	using namespace xPlatform;
 	int x = Handler()->AudioSources();
@@ -44,7 +44,8 @@ void eSoundMixer::Update()
 	}
 	if(ready_min)
 	{
-		int* p = (int*)(buffer + ready);
+		byte* buf = ext_buf ? ext_buf : buffer;
+		int* p = (int*)(buf + ready);
 		int* s0 = (int*)Handler()->AudioData(0);
 		int* s1 = (int*)Handler()->AudioData(1);
 		int* s2 = (int*)Handler()->AudioData(2);
@@ -74,12 +75,15 @@ void eSoundMixer::Update()
 //=============================================================================
 //	eSoundMixer::Use
 //-----------------------------------------------------------------------------
-void eSoundMixer::Use(dword size)
+void eSoundMixer::Use(dword size, byte* ext_buf)
 {
 	if(size)
 	{
 		if(ready > size)
-			memmove(buffer, buffer + size, ready - size);
+		{
+			byte* buf = ext_buf ? ext_buf : buffer;
+			memmove(buf, buf + size, ready - size);
+		}
 		ready -= size;
 	}
 }

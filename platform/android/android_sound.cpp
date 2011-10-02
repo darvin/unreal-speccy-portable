@@ -34,16 +34,15 @@ void DoneSound()
 static eSoundMixer sound_mixer;
 int UpdateSound(byte* buf)
 {
-	sound_mixer.Update();
+	sound_mixer.Update(buf);
 	int res = 0;
 	dword size = sound_mixer.Ready();
-	if(size > 0)
+	if(size > (44100*2*2/50)*3)
 	{
 		res = size;
 		if(res > 32768)
 			res = 32768;
-		memcpy(buf, sound_mixer.Ptr(), res);
-		sound_mixer.Use(res);
+		sound_mixer.Use(res, buf);
 	}
 	return res;
 }
